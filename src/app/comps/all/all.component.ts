@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ɵɵcontainerRefreshEnd } from "@angular/core";
 import { TaskService } from "../../services/tasks.service";
 @Component({
   selector: "app-all",
   templateUrl: "./all.component.html",
   styleUrls: ["./all.component.scss"]
 })
+
 export class AllComponent implements OnInit {
   allMyTasks: any[] = [];
 
@@ -16,10 +17,15 @@ export class AllComponent implements OnInit {
     //   this.allMyTasks = data;
     // });
 
+    this.refreshData();
+
+    this.tServ.refreshDataEE.subscribe(data => {
+      this.refreshData();
+    });
+
     // adding mapping join
-    this.tServ
-      .getDataFromServer()
-      .subscribe(allMyTasksFromServerwithMemberID => {
+    refreshData() {
+      this.tServ.getDataFromServer().subscribe(allMyTasksFromServerwithMemberID => {
         this.allMyTasks = allMyTasksFromServerwithMemberID.map(tsk => {
           let memberDetails = this.tServ.allMembersInService.find(
             el => el._id == tsk.memberID
@@ -30,5 +36,7 @@ export class AllComponent implements OnInit {
           };
         });
       });
+    }
+    
   }
 }
