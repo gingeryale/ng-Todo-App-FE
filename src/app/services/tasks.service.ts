@@ -1,0 +1,34 @@
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    Authorization: "my-auth-token"
+  })
+};
+
+@Injectable({
+  providedIn: "root"
+})
+export class TaskService {
+  constructor(private http: HttpClient) {}
+
+  allMembersInService: any[] = [];
+
+  getDataFromServer(): Observable<any> {
+    return this.http.get("http://localhost:3000/api/tasks");
+  }
+
+  getMembersFromServer(): Observable<any> {
+    return this.http.get("http://localhost:3000/api/tasks/allMembers");
+  }
+
+  addTask(formObject: any): Observable<any> {
+    return this.http.post(
+      "http://localhost:3000/api/tasks",
+      formObject,
+      httpOptions
+    );
+  }
+}

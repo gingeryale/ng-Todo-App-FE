@@ -1,0 +1,7 @@
+<p>add tsks!</p>
+<select [(ngModel)]="selectedMemeberID" (ngModelChange)="onChange($event)">
+  <option *ngFor="let m of allMyMembers" [value]="m._id"> {{ m.name }}</option>
+</select>
+<input [(ngModel)]="body" placeholder="enter task" />
+
+<button (click)="sendForm()">Send</button>
