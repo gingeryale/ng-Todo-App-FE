@@ -17,7 +17,7 @@ export class AddComponent implements OnInit {
     this.tServe.getMembersFromServer().subscribe(data => {
       this.allMyMembers = data;
       this.tServe.allMembersInService = data;
-      this.tServe.refreshDataEE.emit("refresh");
+      this.tServe.refresherEE.emit("refresh");
     });
   }
 

@@ -16,27 +16,27 @@ export class AllComponent implements OnInit {
     // this.tServ.getDataFromServer().subscribe(data => {
     //   this.allMyTasks = data;
     // });
-
-    this.refreshData();
-
-    this.tServ.refreshDataEE.subscribe(data => {
-      this.refreshData();
+    this.tServ.refresherEE.subscribe(data => {
+      this.refresh();
     });
 
-    // adding mapping join
-    refreshData() {
-      this.tServ.getDataFromServer().subscribe(allMyTasksFromServerwithMemberID => {
-        this.allMyTasks = allMyTasksFromServerwithMemberID.map(tsk => {
-          let memberDetails = this.tServ.allMembersInService.find(
-            el => el._id == tsk.memberID
-          );
-          return {
-            body: tsk.body,
-            member: memberDetails.name
-          };
-        });
-      });
-    }
-    
+    this.refresh();
+
   }
+
+  // adding mapping join
+  refresh() {
+    this.tServ.getDataFromServer().subscribe(allMyTasksFromServerwithMemberID => {
+      this.allMyTasks = allMyTasksFromServerwithMemberID.map(tsk => {
+        let memberDetails = this.tServ.allMembersInService.find(
+          el => el._id == tsk.memberID
+        );
+        return {
+          body: tsk.body,
+          member: memberDetails.name
+        };
+      });
+    });
+  }
+
 }

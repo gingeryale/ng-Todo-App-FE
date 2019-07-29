@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { EventEmitter } from "@angular/core";
+import { EventEmitter } from "@angular/core"
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,8 +13,9 @@ const httpOptions = {
 @Injectable({
   providedIn: "root"
 })
+
 export class TaskService {
-  refreshDataEE: EventEmitter<string> = new EventEmitter();
+  refresherEE: EventEmitter<string> = new EventEmitter();
 
   constructor(private http: HttpClient) {}
 
