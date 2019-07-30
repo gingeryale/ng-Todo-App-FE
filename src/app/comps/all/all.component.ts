@@ -23,7 +23,16 @@ export class AllComponent implements OnInit {
     this.refresh();
 
   }
+// delete function
+deleteTask(tid){
+  console.log(tid);
 
+    this.tServ.deleteTaskfromDB(tid).subscribe(data => {
+        //task deleted!
+        this.tServ.refresherEE.emit('gone');
+
+    })
+}
   // adding mapping join
   refresh() {
     this.tServ.getDataFromServer().subscribe(allMyTasksFromServerwithMemberID => {
@@ -33,7 +42,8 @@ export class AllComponent implements OnInit {
         );
         return {
           body: tsk.body,
-          member: memberDetails.name
+          member: memberDetails.name,
+          tid: tsk._id
         };
       });
     });

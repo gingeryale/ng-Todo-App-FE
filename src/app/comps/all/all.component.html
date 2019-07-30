@@ -2,4 +2,6 @@
 <div *ngFor="let t of allMyTasks">
   {{ t.member }}
   {{ t.body }}
+  {{ t.tid }}
+  <button (click)="deleteTask(t.tid)">X</button>
 </div>

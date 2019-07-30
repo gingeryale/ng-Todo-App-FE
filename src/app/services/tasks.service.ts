@@ -29,6 +29,11 @@ export class TaskService {
     return this.http.get("http://localhost:3000/api/tasks/allMembers");
   }
 
+  deleteTaskfromDB(tid: string): Observable<any> {
+    //http://localhost:3000/api/deletechannel?cid=num
+    return this.http.get('http://localhost:3000/api/deltask?cid='+tid);
+}
+
   addTask(formObject: any): Observable<any> {
     return this.http.post(
       "http://localhost:3000/api/tasks",
